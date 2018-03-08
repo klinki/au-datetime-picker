@@ -1,0 +1,146 @@
+.container {
+  display: grid;
+}
+
+.container.per-row-3 {
+  grid-template-columns: repeat(3, 1fr);
+
+  .legend-wrapper {
+    grid-column-end: span 3;
+  }
+}
+
+.container.per-row-7 {
+  grid-template-columns: repeat(7, 1fr);
+
+
+  .legend-wrapper {
+    grid-column-end: span 7;
+  }
+}
+
+.legend-wrapper {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.legend.interactive {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.displayed {
+  // background-color: yellow;
+}
+
+.legend {
+  cursor: default;
+  font-weight: bold;
+  text-align: center;
+}
+
+.item, .interactive {
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #eee
+  }
+}
+
+.selected, .selected:hover {
+  background-color: #337ab7;
+  color: white;
+}
+
+.item {
+  position: relative;
+
+  &.picker-large {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.item.now:before {
+  content: '';
+  display: inline-block;
+  border: solid transparent;
+  border-width: 0 0 7px 7px;
+  border-bottom-color: #337ab7;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+}
+
+.item.now.selected:before {
+  border-bottom-color: white;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  width: 266px;
+  height: 289px;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  display: block;
+  margin: 2px 0;
+  padding: 4px;
+}
+
+.mode-switcher {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.container, .time-container {
+  margin-top: 15px;
+}
+
+.time-container {
+  height: 192px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-container div {
+  display: flex;
+  justify-content: space-around
+}
+
+.action-buttons {/*
+  margin-left: 20px;
+  margin-right: 35px;*/
+}
+
+.action-buttons a {
+  padding: 10px;
+}
+
+.mode-switcher .legend {
+  padding-left: 75px;
+  padding-right: 75px;
+}
+
+.time {
+  margin-left: 60px;
+}
+
+.time-container div {
+  width: 206px;
+}
+
+.item.minutes {
+  right: 20px;
+}
+
+.time a, .time span {
+  vertical-align: middle;
+  line-height: 38px;
+}

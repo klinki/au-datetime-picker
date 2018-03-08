@@ -1,0 +1,72 @@
+<template>
+  <require from="./date-time-picker.scss"></require>
+  <require from="eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"></require>
+  <require from="aurelia-bootstrap-datetimepicker/src/bootstrap-datetimepicker-bs4.css"></require>
+  <require from="font-awesome/css/font-awesome.css"></require>
+  <div class="input-group">
+    <input class="form-control datepicker-input" type="datetime"
+      value="${formatDate(selectedDate, options.format)}"
+      focus.trigger="show()">
+      <span class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" click.delegate="show()">
+            <span class="fa fa-calendar"></span>
+          </button>
+      </span>
+  </div>
+  <div blur.trigger="hide()" style="display: none" class="bootstrap-datetimepicker-widget dropdown-menu usetwentyfour bottom">
+    <div if.bind="mode === 'date'" class="container ${currentScope.isFinal() ? 'per-row-7': 'per-row-3'}">
+      <div class="legend-wrapper">
+        <span class="legend interactive arrow prev" click.delegate="previous()">«</span>
+        <span class="legend interactive " click.delegate="zoomOut()">${getTitle(viewedDate)}</span>
+        <span class="legend interactive arrow next" click.delegate="next()">»</span>
+      </div>
+      <template if.bind="showDays(currentScope)">
+        <div repeat.for="day of getDaysOfWeek()" class="legend">
+          ${day}
+        </div>
+      </template>
+      <template repeat.for="item of getOptions(currentScope, viewedDate)">
+        <div click.delegate="selectItem(item)" class="item ${getItemClasses(item)}">
+          ${getLabel(item)}
+        </div>
+      </template>
+    </div>
+
+    <div if.bind="mode === 'time'">
+        <div class="time-container">
+          <div class="action-buttons">
+            <a class="item" click.delegate="addHours(1)">
+              <span class="fa fa-arrow-up"></span>
+            </a>
+            <a class="item minutes" click.delegate="addMinutes(1)">
+              <span class="fa fa-arrow-up"></span>
+            </a>
+          </div>
+
+          <div class="time">
+            <a click.delegate="">${formatDate(selectedDate, 'HH')}</a>
+            <span>:</span>
+            <a>${formatDate(selectedDate, 'mm')}</a>
+            <button class="btn btn-primary" click.delegate="toggleAmPm()">${amPm}</button>
+          </div>
+          <div class="action-buttons">
+            <a class="item" click.delegate="addHours(-1)">
+              <span class="fa fa-arrow-down"></span>
+            </a>
+            <a class="item minutes" click.delegate="addMinutes(-1)">
+              <span class="fa fa-arrow-down"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    <div class="mode-switcher">
+      <a class="legend interactive" click.delegate="toggleMode()">
+        <span class="fa ${mode === 'date' ? 'fa-clock-o' : 'fa-calendar'}"></span>
+        ${mode == 'date' ? 'time' : 'date'}
+      </a>
+    </div>
+  </div>
+
+
+</template>
