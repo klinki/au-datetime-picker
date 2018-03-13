@@ -71,18 +71,18 @@ export abstract class BaseStrategy implements SelectionStrategy {
 }
 
 export class YearSelectionStrategy extends BaseStrategy {
-  public next(selectedDate) {
+  public next(selectedDate: Date) {
     return addYears(selectedDate, 10);
   }
 
-  public previous(selectedDate) {
+  public previous(selectedDate: Date) {
     return addYears(selectedDate, -10);
   }
 
-  public getItems(selectedDate) {
+  public getItems(selectedDate: Date) {
     // todo locale startofweek
     const initialDate = [selectedDate]
-      .map(startOfYear)
+      .map(date => startOfYear(date))
       .pop();
 
     const years = Array.from(new Array(12), (_, index) => addYears(initialDate, index));
@@ -109,20 +109,20 @@ export class YearSelectionStrategy extends BaseStrategy {
 }
 
 export class MonthSelectionStrategy extends BaseStrategy {
-  public next(selectedDate) {
+  public next(selectedDate: Date) {
     return addYears(selectedDate, 1);
   }
 
-  public previous(selectedDate) {
+  public previous(selectedDate: Date) {
     return addYears(selectedDate, -1);
   }
 
-  public getItems(selectedDate) {
+  public getItems(selectedDate: Date) {
     // todo locale startofweek
     const initialDate = [selectedDate]
-      .map(startOfMonth)
-      .map((date) => getFirstDayOfWeek(date))
-      .map(startOfDay)
+      .map(date => startOfMonth(date))
+      .map(date => getFirstDayOfWeek(date))
+      .map(date => startOfDay(date))
       .pop();
 
     const months = Array.from(new Array(12), (_, index) => addMonths(initialDate, index));
@@ -149,20 +149,20 @@ export class DaySelectionStrategy extends BaseStrategy {
   protected _previousStrategy: SelectionStrategy;
   protected _nextStrategy: SelectionStrategy;
 
-  public next(selectedDate) {
+  public next(selectedDate: Date) {
     return addMonths(selectedDate, 1);
   }
 
-  public previous(selectedDate) {
+  public previous(selectedDate: Date) {
     return addMonths(selectedDate, -1);
   }
 
-  public getItems(selectedDate) {
+  public getItems(selectedDate: Date) {
     // todo locale startofweek
     const initialDate = [selectedDate]
-      .map(startOfMonth)
-      .map((date) => getFirstDayOfWeek(date))
-      .map(startOfDay)
+      .map(date => startOfMonth(date))
+      .map(date => getFirstDayOfWeek(date))
+      .map(date => startOfDay(date))
       .pop();
 
     const days = Array.from(new Array(42), (_, index) => addDays(initialDate, index));
@@ -177,7 +177,7 @@ export class DaySelectionStrategy extends BaseStrategy {
   public title(date: Date, locale?: any): string {
     const options = locale ? { locale } : this._formattiongOptions;
 
-    return formatDate(date, 'MMMM YYYY', this._formattiongOptions);
+    return formatDate(date, 'MMMM YYYY', options);
   }
 
   public isEqual(a: Date, b: Date): boolean {
@@ -190,18 +190,18 @@ export class HourSelectionStrategy extends BaseStrategy {
   protected _previousStrategy: SelectionStrategy;
   protected _nextStrategy: SelectionStrategy;
 
-  public next(selectedDate) {
+  public next(selectedDate: Date) {
     return addHours(selectedDate, 1);
   }
 
-  public previous(selectedDate) {
+  public previous(selectedDate: Date) {
     return addHours(selectedDate, -1);
   }
 
-  public getItems(selectedDate) {
+  public getItems(selectedDate: Date) {
     // todo locale startofweek
     const initialDate = [selectedDate]
-      .map(startOfDay)
+      .map(date => startOfDay(date))
       .pop();
 
     const hours = Array.from(new Array(12), (_, index) => addHours(initialDate, index));
@@ -227,18 +227,18 @@ export class MinuteSelectionStrategy extends BaseStrategy {
   protected _previousStrategy: SelectionStrategy;
   protected _nextStrategy: SelectionStrategy;
 
-  public next(selectedDate) {
+  public next(selectedDate: Date) {
     return addMinutes(selectedDate, 1);
   }
 
-  public previous(selectedDate) {
+  public previous(selectedDate: Date) {
     return addMinutes(selectedDate, -1);
   }
 
-  public getItems(selectedDate) {
+  public getItems(selectedDate: Date) {
     const initialDate = [selectedDate]
-      .map(startOfDay)
-      .map(startOfHour)
+      .map(date => startOfDay(date))
+      .map(date => startOfHour(date))
       .pop();
 
     const minutes = Array.from(new Array(12), (_, index) => addMinutes(initialDate, index * 5));
@@ -260,6 +260,6 @@ export class MinuteSelectionStrategy extends BaseStrategy {
   }
 }
 
-function getFirstDayOfWeek(date) {
+function getFirstDayOfWeek(date: Date) {
   return startOfWeek(date, { weekStartsOn: 1 } );
 }

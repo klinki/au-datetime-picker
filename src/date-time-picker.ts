@@ -9,8 +9,6 @@ import { addDays, addHours, addMinutes, addMonths, addYears,
 import 'bootstrap';
 import Popper from 'popper.js';
 
-import { userLocale } from '../../../shared/services/moment.service';
-
 import { BaseStrategy, DaySelectionStrategy, MonthSelectionStrategy,
   SelectionStrategy, YearSelectionStrategy } from './date-time-picker-strategies';
 
@@ -20,8 +18,11 @@ export class DateTimePicker {
 
   @bindable({defaultBindingMode: bindingMode.twoWay})
   protected selectedDate: Date;
-  protected viewedDate: Date;
 
+  @bindable({defaultBindingMode: bindingMode.twoWay})
+  protected textValue: string;
+
+  protected viewedDate: Date;
   protected now: Date;
 
   protected currentScope: SelectionStrategy;
@@ -32,10 +33,12 @@ export class DateTimePicker {
 
   protected popper: Popper;
   protected poppedElement: Element;
+  protected hideCallback: (event: any) => void;
+
+  public amPm = 'AM';
+  public mode = 'date';
 
   constructor(protected element: Element) {
-    this.locale = userLocale;
-
     this.strategies = [
       new YearSelectionStrategy(),
       new MonthSelectionStrategy(),
@@ -59,8 +62,6 @@ export class DateTimePicker {
     this.initialize();
   }
 
-  protected hideCallback;
-
   public attached() {
     const reference = $(this.element).find('.datepicker-input');
     this.poppedElement = $(this.element).find('.dropdown-menu').get(0);
@@ -81,36 +82,42 @@ export class DateTimePicker {
       placement: 'auto-start'
     });
   }
-/*
-  public bind(bindingContext: object, overrideContext: object) {
-    const options = this.element.getAttribute('options');
-    const selectedDate = this.element.getAttribute('selected-date') as any;
 
-    this.selectedDate = selectedDate ? selectedDate : new Date();
-  }
-*/
   public detached() {
     $('body').off('click', this.hideCallback);
   }
 
-  public optionsChanged(newValue, oldValue) {
+  public optionsChanged(newValue: any, oldValue: any) {
     if (!newValue) {
       this.options = { format: 'DD. MM. YYYY HH:mm' };
     }
+
+    if (newValue !== oldValue) {
+      console.error('Not yet implemented');
+    }
   }
 
-  public selectedDateChanged(newValue, oldValue) {
+  public selectedDateChanged(newValue: any, oldValue: any) {
     if (isNaN(Date.parse(newValue)) && newValue !== null) {
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
 
     if (!newValue) {
-      this.selectedDate = new Date();
+      newValue = new Date();
+    }
+
+    if (newValue !== oldValue && newValue) {
+      this.textValue = this.formatDate(this.selectedDate, this.options.format);
+    }
+  }
+
+  public textValueChanged(newValue: any, oldValue: any) {
+    if (newValue !== oldValue && newValue) {
+      this.selectedDate = parseDate(newValue, this.options.format, new Date());
     }
   }
 
   private initialize() {
-    this.locale = userLocale;
     this.now = this.viewedDate = this.selectedDate = new Date();
   }
 
@@ -123,11 +130,11 @@ export class DateTimePicker {
     return daysOfWeek;
   }
 
-  public getOptions(currentScope: SelectionStrategy, date) {
+  public getOptions(currentScope: SelectionStrategy, date: Date): Date[] {
     return currentScope.getItems(date);
   }
 
-  public getFirstDayOfWeek(date) {
+  public getFirstDayOfWeek(date: Date): Date {
     return startOfWeek(date, { weekStartsOn: 1 } );
   }
 
@@ -179,7 +186,7 @@ export class DateTimePicker {
     }
   }
 
-  public formatDate(date, format) {
+  public formatDate(date: Date, format: string) {
     return formatDate(date, format, { locale: this.locale });
   }
 
@@ -211,9 +218,6 @@ export class DateTimePicker {
     return classes.join(' ');
   }
 
-  public amPm = 'AM';
-  public mode = 'date';
-
   public toggleAmPm() {
     if (this.amPm === 'AM') {
       this.selectedDate = addHours(this.selectedDate, 12);
@@ -237,11 +241,11 @@ export class DateTimePicker {
   }
 
   public selectHours() {
-
+    console.error('Not yet implemented');
   }
 
   public selectMinutes() {
-
+    console.error('Not yet implemented');
   }
 
   public show() {
