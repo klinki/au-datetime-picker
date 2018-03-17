@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/klinki/au-datetime-picker.svg?branch=master)](https://travis-ci.org/klinki/au-datetime-picker)
+[![npm version](https://badge.fury.io/js/au-datetime-picker.svg)](https://www.npmjs.com/package/au-datetime-picker)
+
 # au-datetime-picker
 Aurelia custom element for date time picker.
 
