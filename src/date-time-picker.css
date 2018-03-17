@@ -4,19 +4,18 @@
 
 .container.per-row-3 {
   grid-template-columns: repeat(3, 1fr);
+}
 
-  .legend-wrapper {
-    grid-column-end: span 3;
-  }
+.container.per-row-3 .legend-wrapper {
+  grid-column-end: span 3;
 }
 
 .container.per-row-7 {
   grid-template-columns: repeat(7, 1fr);
+}
 
-
-  .legend-wrapper {
-    grid-column-end: span 7;
-  }
+.container.per-row-7 .legend-wrapper {
+  grid-column-end: span 7;
 }
 
 .legend-wrapper {
@@ -30,10 +29,6 @@
   padding-right: 10px;
 }
 
-.displayed {
-  // background-color: yellow;
-}
-
 .legend {
   cursor: default;
   font-weight: bold;
@@ -44,10 +39,10 @@
   text-align: center;
   cursor: pointer;
   border-radius: 4px;
+}
 
-  &:hover {
-    background-color: #eee
-  }
+.item:hover, .interactive:hover {
+  background-color: #eee
 }
 
 .selected, .selected:hover {
@@ -57,11 +52,11 @@
 
 .item {
   position: relative;
+}
 
-  &.picker-large {
-    width: 50px;
-    height: 50px;
-  }
+.item.picker-large {
+  width: 50px;
+  height: 50px;
 }
 
 .item.now:before {
