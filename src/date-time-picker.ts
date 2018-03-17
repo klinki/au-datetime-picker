@@ -6,7 +6,7 @@ import { addDays, addHours, addMinutes, addMonths, addYears,
 // TOOD: Import only required parts
 // (window as any).Popper = Popper;
 // import 'bootstrap/js/dist/dropdown';
-import 'bootstrap';
+import * as $ from 'jquery';
 import Popper from 'popper.js';
 
 import { BaseStrategy, DaySelectionStrategy, MonthSelectionStrategy,
