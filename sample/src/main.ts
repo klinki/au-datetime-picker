@@ -1,9 +1,11 @@
+import { PLATFORM } from "aurelia-pal";
+
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
-//    .plugin('aurelia-testing')
-    .plugin('au-datetime-picker')
+    .plugin(PLATFORM.moduleName('aurelia-testing'))
+    .plugin(PLATFORM.moduleName('au-datetime-picker'))
     .developmentLogging();
 
-  aurelia.start().then(() => aurelia.setRoot());
+  aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
 }

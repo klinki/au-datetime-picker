@@ -1,3 +1,12 @@
 <template>
+  <require from="bootstrap/dist/css/bootstrap.css"></require>
   <h1>${message}</h1>
+
+  <div class="col-sm-3">
+    <form>
+      <div class="form-group">
+        <date-time-picker model.bind="payment.date"></date-time-picker>
+      </div>
+    </form>
+  </div>
 </template>

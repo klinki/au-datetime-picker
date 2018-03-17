@@ -102,6 +102,14 @@ gulp.task('fuse-sample', function () {
     });
 
 
+    fuse.register('font-awesome', {
+      homeDir: 'node_modules/font-awesome/css',
+      main: 'font-awesome.css',
+      instructions: 'font-awesome.css',
+    });
+
+
+
     // vendor bundle
     fuse.bundle("vendor")
         .cache(true)
@@ -126,7 +134,9 @@ gulp.task('fuse-sample', function () {
         + bootstrap
         + eonasdan-bootstrap-datetimepicker
         + eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css
-`)
+        + font-awesome.css
+        + font-awesome/css/font-awesome.css
+`);
 
 
     // app bundle

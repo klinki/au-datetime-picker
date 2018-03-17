@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="black">
+
+    <title><%- htmlWebpackPlugin.options.metadata.title %></title>
+  </head>
+  <body lang="en" aurelia-app="main">
+    <% if (htmlWebpackPlugin.options.metadata.server) { %>
+      <!-- Webpack Dev Server reload -->
+      <script src="/webpack-dev-server.js"></script>
+      <% } %>
+  </body>
+</html>
