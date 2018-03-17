@@ -81,6 +81,7 @@
     "gulp-typescript": "^3.1.4",
     "gulp-watch": "^4.3.11",
     "jasmine-core": "^2.4.1",
+    "jest": "^22.4.2",
     "jsdom": "^11.3.0",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -91,14 +92,14 @@
     "minimatch": "^3.0.2",
     "require-dir": "^0.3.2",
     "run-sequence": "^2.2.0",
+    "semantic-release": "^15.0.3",
     "through2": "^2.0.1",
-    "ts-jest": "^21.2.2",
+    "travis-deploy-once": "^4.4.1",
+    "ts-jest": "^22.4.1",
     "tslint": "^5.8.0",
     "typescript": ">=1.9.0-dev || ^2.0.0",
     "uglify-js": "^3.0.19",
     "vinyl-fs": "^2.4.3",
-    "vinyl-paths": "^2.1.0",
-    "travis-deploy-once": "^4.4.1",
-    "semantic-release": "^15.0.3"
+    "vinyl-paths": "^2.1.0"
   }
 }
