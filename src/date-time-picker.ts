@@ -3,10 +3,6 @@ import { addDays, addHours, addMinutes, addMonths, addYears,
   format as formatDate, getDate, getMonth, getYear, parse as parseDate,
   startOfDay, startOfMonth, startOfWeek, startOfYear } from 'date-fns';
 
-// TOOD: Import only required parts
-// (window as any).Popper = Popper;
-// import 'bootstrap/js/dist/dropdown';
-import * as $ from 'jquery';
 import Popper from 'popper.js';
 
 import { BaseStrategy, DaySelectionStrategy, MonthSelectionStrategy,
@@ -32,7 +28,7 @@ export class DateTimePicker {
   protected options: any = { format: 'DD. MM. YYYY HH:mm' };
 
   protected popper: Popper;
-  protected poppedElement: Element;
+  protected poppedElement: HTMLElement;
   protected hideCallback: (event: any) => void;
 
   public amPm = 'AM';
@@ -62,29 +58,33 @@ export class DateTimePicker {
     this.initialize();
   }
 
+  protected jQueryHas(element: HTMLElement, target: HTMLElement): boolean {
+    return element !== target && element.contains(target);
+  }
+
   public attached() {
-    const reference = $(this.element).find('.datepicker-input');
-    this.poppedElement = $(this.element).find('.dropdown-menu').get(0);
+    const reference = this.element.querySelectorAll('.datepicker-input').item(0) as HTMLElement;
+    this.poppedElement = this.element.querySelectorAll('.dropdown-menu').item(0) as HTMLElement;
 
     const self = this;
 
     this.hideCallback = (event) => {
-      if (!$(self.poppedElement).is(event.target) &&
-        $(self.poppedElement).has(event.target).length === 0
-        && !$(reference).is(event.target)) {
+      if (self.poppedElement !== event.target &&
+        !self.jQueryHas(self.poppedElement, event.target) &&
+        reference !== event.target) {
           self.hide();
       }
     };
 
-    $('body').on('click', this.hideCallback);
+    document.getElementsByTagName('body').item(0).addEventListener('click', this.hideCallback);
 
-    this.popper = new Popper(reference.get(0), this.poppedElement, {
+    this.popper = new Popper(reference, this.poppedElement, {
       placement: 'auto-start'
     });
   }
 
   public detached() {
-    $('body').off('click', this.hideCallback);
+    document.getElementsByTagName('body').item(0).removeEventListener('click', this.hideCallback);
   }
 
   public optionsChanged(newValue: any, oldValue: any) {
@@ -249,10 +249,10 @@ export class DateTimePicker {
   }
 
   public show() {
-    $(this.poppedElement).toggle();
+    this.poppedElement.style.display = '';
   }
 
   public hide() {
-    $(this.poppedElement).hide();
+    this.poppedElement.style.display = 'none';
   }
 }
