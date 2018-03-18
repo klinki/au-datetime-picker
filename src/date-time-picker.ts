@@ -4,9 +4,7 @@ import { addDays, addHours, addMinutes, addMonths, addYears,
   startOfDay, startOfMonth, startOfWeek, startOfYear } from 'date-fns';
 
 import Popper from 'popper.js';
-
-import { BaseStrategy, DaySelectionStrategy, MonthSelectionStrategy,
-  SelectionStrategy, YearSelectionStrategy } from './date-time-picker-strategies';
+import { SelectionScope, DefaultScopes } from './scope';
 
 @autoinject()
 export class DateTimePicker {
@@ -21,8 +19,8 @@ export class DateTimePicker {
   protected viewedDate: Date;
   protected now: Date;
 
-  protected currentScope: SelectionStrategy;
-  protected strategies: BaseStrategy[];
+  protected currentScope: SelectionScope;
+  protected scopes: SelectionScope[];
 
   @bindable
   protected options: any = { format: 'DD. MM. YYYY HH:mm' };
@@ -35,23 +33,8 @@ export class DateTimePicker {
   public mode = 'date';
 
   constructor(protected element: Element) {
-    this.strategies = [
-      new YearSelectionStrategy(),
-      new MonthSelectionStrategy(),
-      new DaySelectionStrategy()
-    ];
-
-    this.strategies.forEach((strategy, index, array) => {
-      if (index + 1 < array.length) {
-        strategy.setNextStrategy(array[index + 1]);
-      }
-
-      if (index - 1 >= 0) {
-        strategy.setPreviousStrategy(array[index - 1]);
-      }
-    });
-
-    this.currentScope = this.strategies[this.strategies.length - 1];
+    this.scopes = DefaultScopes.array;
+    this.currentScope = DefaultScopes.initial;
   }
 
   public created() {
@@ -130,7 +113,7 @@ export class DateTimePicker {
     return daysOfWeek;
   }
 
-  public getOptions(currentScope: SelectionStrategy, date: Date): Date[] {
+  public getOptions(currentScope: SelectionScope, date: Date): Date[] {
     return currentScope.getItems(date);
   }
 
@@ -152,7 +135,7 @@ export class DateTimePicker {
     if (this.currentScope.isFinal()) {
       this.selectedDate = item;
     } else {
-      this.currentScope = this.currentScope.nextStrategy();
+      this.currentScope = this.currentScope.nextScope();
     }
   }
 
@@ -178,7 +161,7 @@ export class DateTimePicker {
   }
 
   public zoomOut() {
-    const previousStrategy = this.currentScope.previousStrategy();
+    const previousStrategy = this.currentScope.previousScope();
 
     if (previousStrategy != null) {
       this.currentScope = previousStrategy;
