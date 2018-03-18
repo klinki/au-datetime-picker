@@ -19,7 +19,7 @@ const defaultScopesArray = [
 });
 
 
-export const DefaultScopes = {
+export const DEFAULT_SCOPES = {
   array: defaultScopesArray,
   initial: defaultScopesArray[defaultScopesArray.length - 1]
 };

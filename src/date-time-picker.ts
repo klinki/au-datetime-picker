@@ -2,9 +2,10 @@ import { autoinject, bindable, bindingMode } from 'aurelia-framework';
 import { addDays, addHours, addMinutes, addMonths, addYears,
   format as formatDate, getDate, getMonth, getYear, parse as parseDate,
   startOfDay, startOfMonth, startOfWeek, startOfYear } from 'date-fns';
-
 import Popper from 'popper.js';
-import { SelectionScope, DefaultScopes } from './scope';
+
+import { SelectionScope, DEFAULT_SCOPES } from './scope';
+import { DEFAULT_CONFIGURATION, DateTimePickerConfiguration } from './configuration';
 
 @autoinject()
 export class DateTimePicker {
@@ -23,7 +24,7 @@ export class DateTimePicker {
   protected scopes: SelectionScope[];
 
   @bindable
-  protected options: any = { format: 'DD. MM. YYYY HH:mm' };
+  protected options: DateTimePickerConfiguration = DEFAULT_CONFIGURATION;
 
   protected popper: Popper;
   protected poppedElement: HTMLElement;
@@ -33,8 +34,8 @@ export class DateTimePicker {
   public mode = 'date';
 
   constructor(protected element: Element) {
-    this.scopes = DefaultScopes.array;
-    this.currentScope = DefaultScopes.initial;
+    this.scopes = DEFAULT_SCOPES.array;
+    this.currentScope = DEFAULT_SCOPES.initial;
   }
 
   public created() {
@@ -70,9 +71,11 @@ export class DateTimePicker {
     document.getElementsByTagName('body').item(0).removeEventListener('click', this.hideCallback);
   }
 
-  public optionsChanged(newValue: any, oldValue: any) {
+  public optionsChanged(newValue: DateTimePickerConfiguration, oldValue: DateTimePickerConfiguration) {
     if (!newValue) {
-      this.options = { format: 'DD. MM. YYYY HH:mm' };
+      this.options = DEFAULT_CONFIGURATION;
+      this.scopes = DEFAULT_CONFIGURATION.scopes;
+      this.currentScope = DEFAULT_CONFIGURATION.initialScope;
     }
 
     if (newValue !== oldValue) {
@@ -118,7 +121,7 @@ export class DateTimePicker {
   }
 
   public getFirstDayOfWeek(date: Date): Date {
-    return startOfWeek(date, { weekStartsOn: 1 } );
+    return startOfWeek(date, { weekStartsOn: this.options.weekStartsOn } );
   }
 
   public next() {
