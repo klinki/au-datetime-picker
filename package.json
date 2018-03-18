@@ -40,16 +40,15 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "aurelia-bootstrap-datetimepicker": "^1.1.1",
-    "aurelia-framework": "^1.1.5",
-    "aurelia-pal": "^1.7.0",
-    "date-fns": "^2.0.0-alpha.7",
-    "popper.js": "^1.14.1"
+    "aurelia-bootstrap-datetimepicker": "^1.1.0",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47"
   },
   "peerDependencies": {
-    "aurelia-bootstrap-datetimepicker": "^1.1.0",
+    "aurelia-framework": "^1.1.5",
+    "aurelia-pal": "^1.7.0",
     "bootstrap": "^4.0.0",
     "date-fns": "^2.0.0-alpha.7",
+    "font-awesome": "^4.7.0",
     "popper.js": "^1.14.0"
   },
   "devDependencies": {
@@ -58,12 +57,16 @@
     "@types/node": "^6.0.45",
     "aurelia-bootstrapper": "^2.1.1",
     "aurelia-cli": "^0.32.0",
+    "aurelia-framework": "^1.1.5",
     "aurelia-loader-nodejs": "^1.0.1",
+    "aurelia-pal": "^1.7.0",
     "aurelia-pal-nodejs": "^1.0.0-beta.2.0.0",
     "aurelia-testing": "^1.0.0-beta.4.0.0",
     "aurelia-tools": "^1.0.0",
+    "bootstrap": "^4.0.0",
     "browser-sync": "^2.13.0",
     "connect-history-api-fallback": "^1.2.0",
+    "date-fns": "^2.0.0-alpha.7",
     "debounce": "^1.0.2",
     "del": "^3.0.0",
     "event-stream": "^3.3.3",
@@ -88,6 +91,7 @@
     "karma-typescript-preprocessor": "^0.3.1",
     "merge2": "^1.2.0",
     "minimatch": "^3.0.2",
+    "popper.js": "^1.14.0",
     "require-dir": "^0.3.2",
     "run-sequence": "^2.2.0",
     "semantic-release": "^15.0.3",
