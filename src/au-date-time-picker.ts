@@ -8,7 +8,7 @@ import { SelectionScope, DEFAULT_SCOPES } from './scope';
 import { DEFAULT_CONFIGURATION, DateTimePickerConfiguration } from './configuration';
 
 @autoinject()
-export class DateTimePicker {
+export class AuDateTimePicker {
   protected locale: any;
 
   @bindable({defaultBindingMode: bindingMode.twoWay})
