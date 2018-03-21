@@ -101,5 +101,9 @@
     "uglify-js": "^3.0.19",
     "vinyl-fs": "^2.4.3",
     "vinyl-paths": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
   }
 }
