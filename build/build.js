@@ -154,7 +154,7 @@ gulp.task('build-run', function (callback) {
 
 
 gulp.task('check-build', function () {
-  var TypeHelper = require('../sample/node_modules/fuse-box-typechecker').TypeHelper
+  var TypeHelper = require('../node_modules/fuse-box-typechecker').TypeHelper
   var checkBuild = TypeHelper({
     tsConfig: './tsconfig.json',
     name: 'Ts/TsLint Build Check',

@@ -20,12 +20,12 @@ const {
     CSSModules,
     Sparky,
     TypeScriptHelpers
-} = require("../sample/node_modules/fuse-box");
+} = require("../node_modules/fuse-box");
 
 
 
 // typechecker
-var TypeHelper = require('../sample/node_modules/fuse-box-typechecker').TypeHelper
+var TypeHelper = require('../node_modules/fuse-box-typechecker').TypeHelper
 
 
 
@@ -82,7 +82,7 @@ gulp.task('plugin-typechecker', function () {
 gulp.task('fuse-sample', function () {
 
     // typechecker
-    const TypeCheckPlugins = require('../sample/node_modules/fuse-box-typechecker').TypeCheckPlugin;
+    const TypeCheckPlugins = require('../node_modules/fuse-box-typechecker').TypeCheckPlugin;
 
     // init fusebox
     const fuse = FuseBox.init({
