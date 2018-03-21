@@ -34,10 +34,12 @@
     "run-watch": "./node_modules/.bin/gulp watch",
     "test-watch": "./node_modules/.bin/jest --config=jest.config.json --watch",
     "build": "./node_modules/.bin/gulp build",
+    "jest": "jest --config=jest.config.json",
     "test": "./node_modules/.bin/jest --config=jest.config.json",
     "build-all": "npm run setup & npm run build & npm run test",
     "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
+    "prepublish": "npm run build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "dependencies": {
     "aurelia-bootstrap-datetimepicker": "^1.1.0",
