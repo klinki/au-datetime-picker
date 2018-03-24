@@ -22,7 +22,7 @@ export class MinuteScope extends AbstractScope {
     return minutes;
   }
 
-  public formatDate(date: Date, locale?: any): string {
+  public formatDate(date: Date): string {
     return formatDate(date, 'mm');
   }
 

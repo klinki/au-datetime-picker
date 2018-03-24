@@ -21,7 +21,7 @@ export class HourScope extends AbstractScope {
     return hours;
   }
 
-  public formatDate(date: Date): string {
+  public formatDate(date: Date, locale?: any): string {
     return formatDate(date, 'HH');
   }
 

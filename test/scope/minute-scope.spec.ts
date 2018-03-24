@@ -33,13 +33,6 @@ describe('MinuteScope', () => {
     expect(result).toBe('59');
   });
 
-  it('formatDate should respect locale', () => {
-    const locale = undefined;
-    const result = scope.formatDate(date, locale);
-    expect(result).toBe('59');
-  });
-
-
   it('title should return year', () => {
     const result = scope.title(date);
     expect(result).toBe('24. 04. 2018');
