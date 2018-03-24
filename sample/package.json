@@ -7,6 +7,9 @@
     "url": "???"
   },
   "license": "MIT",
+  "scripts": {
+    "build": "au build --env prod"
+  },
   "dependencies": {
     "au-datetime-picker": "0.0.8",
     "aurelia-animator-css": "^1.0.2",

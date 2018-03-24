@@ -10,6 +10,8 @@ node_js:
 after_success:
   - npm install
   - npm run build && npm run travis-deploy-once "npm run semantic-release"
+  - cd sample && yarn && npm run build
+  - git checkout gh-pages && git rm * && cp sample/dist/* . && git add . && git commit -m 'chore(sample): Update sample' && git push 
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
