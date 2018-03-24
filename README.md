@@ -4,6 +4,9 @@
 # au-datetime-picker
 Aurelia custom element for date time picker.
 
+## Example
+Example is located at: https://klinki.github.io/au-datetime-picker/
+
 ## How to use
 * Run `npm install au-datetime-picker`
 * Add `aurelia.use.plugin(PLATFORM.moduleName('au-datetime-picker'))` to your `main.ts` file (or other aurelia configuration file)
