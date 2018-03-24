@@ -22,7 +22,9 @@ export class HourScope extends AbstractScope {
   }
 
   public formatDate(date: Date, locale?: any): string {
-    return formatDate(date, 'HH');
+    const options = locale ? { locale } : this._formattiongOptions;
+
+    return formatDate(date, 'HH', options);
   }
 
   public title(date: Date): string {
