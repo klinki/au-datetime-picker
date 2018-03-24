@@ -9,6 +9,10 @@ Aurelia custom element for date time picker.
 * Add `aurelia.use.plugin(PLATFORM.moduleName('au-datetime-picker'))` to your `main.ts` file (or other aurelia configuration file)
 * Use `<au-datetime-picker></au-datetime-picker>` in your code
 
+## Goal of this library
+I created this library because I needed some lightweight date-time picker and almost all available solutions were using momentjs library.
+Because momentjs is not treeshakeable and is very very bloated, I decided to replace it by date-fns which offers much more modular approach.
+
 ## License
 MIT License
 
