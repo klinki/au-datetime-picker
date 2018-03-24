@@ -1,11 +1,12 @@
 <template>
   <require from="bootstrap/dist/css/bootstrap.css"></require>
-  <h1>${message}</h1>
+  <h1>${message} - ${appInfo.version}</h1>
 
   <div class="col-sm-3">
     <form>
       <div class="form-group">
-        <date-time-picker model.bind="payment.date"></date-time-picker>
+        <label>Simple datetime picker</label>
+        <au-date-time-picker model.bind="date"></au-date-time-picker>
       </div>
     </form>
   </div>

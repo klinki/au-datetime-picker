@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const { AureliaPlugin, ModuleDependenciesPlugin } = require('aurelia-webpack-plugin');
 const { ProvidePlugin, ContextReplacementPlugin,  IgnorePlugin,
   SourceMapDevToolPlugin, NormalModuleReplacementPlugin, DefinePlugin } = require('webpack');
@@ -16,6 +17,10 @@ const { ProvidePlugin, ContextReplacementPlugin,  IgnorePlugin,
 // const { } = require('ts-loader');
 const project = require('./aurelia_project/aurelia.json');
 const projectJSON = require('./package.json');
+
+const gitRevisionPlugin = new GitRevisionPlugin({
+  versionCommand: 'describe --always --tags'
+});
 
 const tsLoader = 'ts-loader';
 
@@ -127,6 +132,12 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
     ...when(extractCss, new ExtractTextPlugin({
       filename: `css/${production ? '[contenthash].css' : '[id].css'}`,
       allChunks: true
-    }))
+    })),
+    new DefinePlugin({
+      'ENV_VERSION': JSON.stringify(gitRevisionPlugin.version()),
+      'ENV_COMMITHASH': JSON.stringify(gitRevisionPlugin.commithash()),
+      'ENV_DATE': JSON.stringify((new Date()).getTime()),
+      'ENV_BRANCH': JSON.stringify(gitRevisionPlugin.branch())
+    }),
   ]
 });
