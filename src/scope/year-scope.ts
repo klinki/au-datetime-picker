@@ -35,6 +35,7 @@ export class YearScope extends AbstractScope {
   }
 
   public isEqual(a: Date, b: Date): boolean {
-    return getYear(a) === getYear(b);
+    return this.previousScopeIsEqual(a, b)
+      && getYear(a) === getYear(b);
   }
 }

@@ -49,4 +49,8 @@ export abstract class AbstractScope implements SelectionScope {
       this._formattiongOptions = undefined;
     }
   }
+
+  protected previousScopeIsEqual(a: Date, b: Date): boolean {
+    return this._previousScope ? this._previousScope.isEqual(a, b) : true;
+  }
 }

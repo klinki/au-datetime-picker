@@ -35,7 +35,7 @@ export class MonthScope extends AbstractScope {
     return formatDate(date, 'YYYY');
   }
   public isEqual(a: Date, b: Date): boolean {
-    return this.previousScope().isEqual(a, b)
+    return this.previousScopeIsEqual(a, b)
      && getMonth(a) === getMonth(b);
   }
 }

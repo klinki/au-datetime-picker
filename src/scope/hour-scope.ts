@@ -1,14 +1,14 @@
-import { format as formatDate, addHours, startOfDay, getHours } from 'date-fns';
+import { format as formatDate, addHours, startOfDay, getHours, addDays } from 'date-fns';
 
 import { AbstractScope } from './abstract-scope';
 
 export class HourScope extends AbstractScope {
   public next(selectedDate: Date) {
-    return addHours(selectedDate, 1);
+    return addDays(selectedDate, 1);
   }
 
   public previous(selectedDate: Date) {
-    return addHours(selectedDate, -1);
+    return addDays(selectedDate, -1);
   }
 
   public getItems(selectedDate: Date) {
@@ -30,7 +30,7 @@ export class HourScope extends AbstractScope {
   }
 
   public isEqual(a: Date, b: Date): boolean {
-    return this.previousScope().isEqual(a, b)
+    return this.previousScopeIsEqual(a, b)
      && getHours(a) === getHours(b);
   }
 }

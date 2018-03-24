@@ -1,14 +1,14 @@
-import { format as formatDate, addMinutes, startOfDay, startOfHour, getMinutes } from 'date-fns';
+import { format as formatDate, addMinutes, startOfDay, startOfHour, getMinutes, addHours } from 'date-fns';
 
 import { AbstractScope } from './abstract-scope';
 
-export class MinuteSelectionStrategy extends AbstractScope {
+export class MinuteScope extends AbstractScope {
   public next(selectedDate: Date) {
-    return addMinutes(selectedDate, 1);
+    return addHours(selectedDate, 1);
   }
 
   public previous(selectedDate: Date) {
-    return addMinutes(selectedDate, -1);
+    return addHours(selectedDate, -1);
   }
 
   public getItems(selectedDate: Date) {
@@ -22,7 +22,7 @@ export class MinuteSelectionStrategy extends AbstractScope {
     return minutes;
   }
 
-  public formatDate(date: Date): string {
+  public formatDate(date: Date, locale?: any): string {
     return formatDate(date, 'mm');
   }
 
@@ -31,7 +31,7 @@ export class MinuteSelectionStrategy extends AbstractScope {
   }
 
   public isEqual(a: Date, b: Date): boolean {
-    return this.previousScope().isEqual(a, b)
+    return this.previousScopeIsEqual(a, b)
      && getMinutes(a) === getMinutes(b);
   }
 }
