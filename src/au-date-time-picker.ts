@@ -234,6 +234,10 @@ export class AuDateTimePicker {
     console.error('Not yet implemented');
   }
 
+  protected isVisible() {
+    return this.poppedElement.style.display === '';
+  }
+
   public show() {
     this.poppedElement.style.display = '';
   }
@@ -246,5 +250,9 @@ export class AuDateTimePicker {
     if (this.options.showOnInputFocus) {
       this.show();
     }
+  }
+
+  public toggle() {
+    this.isVisible() ? this.hide() : this.show();
   }
 }
