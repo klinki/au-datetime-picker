@@ -8,11 +8,13 @@ export interface DateTimePickerConfiguration {
   weekStartsOn?: 0|1;
   scopes?: SelectionScope[];
   initialScope?: SelectionScope;
+  showOnInputFocus?: boolean;
 }
 
 export const DEFAULT_CONFIGURATION: DateTimePickerConfiguration = {
   format: 'DD. MM. YYYY HH:mm',
   weekStartsOn: 1,
   scopes: DEFAULT_SCOPES.array,
-  initialScope: DEFAULT_SCOPES.initial
+  initialScope: DEFAULT_SCOPES.initial,
+  showOnInputFocus: true
 };

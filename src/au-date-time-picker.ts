@@ -241,4 +241,10 @@ export class AuDateTimePicker {
   public hide() {
     this.poppedElement.style.display = 'none';
   }
+
+  public inputFocus() {
+    if (this.options.showOnInputFocus) {
+      this.show();
+    }
+  }
 }
